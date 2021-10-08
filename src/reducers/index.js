@@ -1,8 +1,40 @@
+import { bindActionCreators } from "redux";
 
 export const initialState = {
+    smurfs: [],
+    isLoading: false,
+    errMsg:''
 }
 
-const reducer = ()=>{
+const reducer = (state = initialState, action)=>{
+    switch(action.type) {
+        //do this if smurf was fetched
+        case FETCH_SMURF:
+        return {
+            ...state,
+            smurfs: action.payload,
+            isLoading: false,
+            errMsg:''
+        }
+        //do this if fetching the smurf failed
+        case FETCH_FAIL:
+            return{
+                ...state,
+                smurfs:[],
+                isLoading:false,
+                errMsg:action.payload
+            }
+        //do this if there was an error fetching the smurf
+        case FETCH_BEGIN: 
+            return {
+                ...state,
+                smurfs:[],
+                isLoading:false,
+                errMsg:action.payload
+            }
+            default:
+                return state;
+    }
 }
 
 //**************DO NOT EDIT ANY CODE BEYOND THIS POINT**************//
