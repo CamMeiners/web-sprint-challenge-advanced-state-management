@@ -1,4 +1,8 @@
 import { bindActionCreators } from "redux";
+import {FETCH_SMURF, FETCH_FAIL, FETCH_BEGIN, ADD_SMURF, FAIL_MSG} from '../actions/index'
+
+
+
 
 export const initialState = {
     smurfs: [],
@@ -36,10 +40,15 @@ const reducer = (state = initialState, action)=>{
         case ADD_SMURF:
             return {
                 ...state,
-                smurfs: [...state, action.payload],
+                smurfs: [...state.smurfs, {id:action.payload.id, name:action.payload.name, nickname:action.payload.nickname, description:action.payload.description, position:action.payload.position}],
                 isLoading:false,
                 errMsg:''
             }
+            case FAIL_MSG:
+                return{
+                    ...state,
+                    errMsg:action.payload
+                }
             default:
                 return state;
 

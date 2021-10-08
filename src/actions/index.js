@@ -4,21 +4,24 @@ export const FETCH_SMURF = 'FETCH_SMURF';
 export const FETCH_FAIL = 'FETCH_FAIL';
 export const FETCH_BEGIN = 'FETCH_BEGIN';
 export const ADD_SMURF = 'ADD_SMURF';
+export const FAIL_MSG = 'FAIL_MSG';
 
-export const fetchSmurfs = () => dispatch => {
-    dispatch(fetchSmurf());
+export const grabSmurfs = () => dispatch => {
+    
+    dispatch(fetchBegin());
     //axios call goes here
-    axios.get('')
+    axios.get('http://localhost:3333/smurfs')
     .then(resp => {
+        console.log('this is the resp stuff!', resp);
         dispatch(fetchSmurf(resp.data));
     })
     .catch(err =>{
-        dispatch(errMsg(err));
+        dispatch(fetchFail(err));
     })
 }
 //actions for doing the things go here
-export const fetchSmurf = (smurf)=> {
-    return ({type:FETCH_SMURF})
+export const fetchSmurf = (smurfs)=> {
+    return ({type:FETCH_SMURF, payload:smurfs})
 }
 
 export const fetchFail = (error) => {
@@ -26,13 +29,16 @@ export const fetchFail = (error) => {
 }
 
 export const fetchBegin = () => {
-    ({type:FETCH_BEGIN})
+    return ({type:FETCH_BEGIN})
 }
 
-export const addSmurf = () => {
-    ({type:ADD_SMURF, payload:smurf})
+export const addSmurf = (smurf) => {
+   return ({type:ADD_SMURF, payload:smurf})
 }
 
+export const failMsg = (error) => {
+   return ({type:FAIL_MSG, payload:error})
+}
 
 
 //Task List:

@@ -6,9 +6,13 @@ import Header from './components/Header';
 import {connect} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
+import { grabSmurfs } from './actions';
 
 class App extends Component {
-  render() {
+  componentDidMount=() => {
+    this.props.grabSmurfs()
+  }
+  render() { 
     return (
       <div className="App">
         <Header />
@@ -21,17 +25,7 @@ class App extends Component {
     );
   }
 }
-
-export default App;
-
-
-const mapStateToProps = (state)=> {
-  return{
-    smurfs: state.smurfState.smurfs
-  }
-}
-
-export default connect(mapStateToProps, {addSmurf})(App)
+export default connect(null, {grabSmurfs})(App)
 
 //Task List:
 //1. Connect the fetchSmurfs actions to the App component.
