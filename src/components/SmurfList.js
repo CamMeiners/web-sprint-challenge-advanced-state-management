@@ -1,8 +1,9 @@
 import React from 'react';
 import Smurf from './Smurf';
 
- const SmurfList = ()=> {
+ const SmurfList = (props)=> {
     const isLoading = false;
+    const {smurfs}=props;
     const testSmurf = {
         id:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
         name:'Poppa Smurf',
@@ -16,7 +17,7 @@ import Smurf from './Smurf';
     }
 
     return(<div className="listContainer">
-        <Smurf smurf={testSmurf}/>
+        {smurfs.map(smurf=><Smurf key={smurf.id}/>)}
     </div>);
 }
 

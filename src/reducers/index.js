@@ -24,16 +24,25 @@ const reducer = (state = initialState, action)=>{
                 isLoading:false,
                 errMsg:action.payload
             }
-        //do this if there was an error fetching the smurf
+        //do this when starting to fetch a smurf
         case FETCH_BEGIN: 
             return {
                 ...state,
                 smurfs:[],
+                isLoading:true,
+                errMsg:''
+            }
+        //do this to add a smurf
+        case ADD_SMURF:
+            return {
+                ...state,
+                smurfs: [...state, action.payload],
                 isLoading:false,
-                errMsg:action.payload
+                errMsg:''
             }
             default:
                 return state;
+
     }
 }
 
